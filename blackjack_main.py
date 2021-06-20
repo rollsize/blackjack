@@ -17,18 +17,18 @@ game_background = transform.scale(image.load(img_game_backghround_path), window_
 display.set_caption("Blackjack")
 #display.set_icon(os.path.join(os.getcwd(), images.icon_path))
 font.init()
-modes = {"Classic": ("Классика", colors.green), "Custom": ("Кастом", colors.red)} # Declare game modes
+#modes = {"Classic": ("Классика", colors.green), "Custom": ("Кастом", colors.red)} # Declare game modes
 player = {"chips": 100, "check_buffs": None}
 bf_costs = {25: "250 chips", 50: "500 chips", 75: "1000 chips"}
 def intro_menu():
     """ Show intro menu in which you can read about rules, change game mode, go to shop or quit """
     btn_start_game, btn_exit_game, btn_shop, btn_add_player, btn_substract_player = intro_buttons_init() # Main buttons for menu
-    current_mode, mode_rect_color = modes["Classic"] # gives here name of mode and color for btn_change_mode color rect
-    current_players = 1
+    #current_mode, mode_rect_color = modes["Classic"] # gives here name of mode and color for btn_change_mode color rect
+    #current_players = 1
     intro = True
     while intro:
-        btn_change_mode = Button(f"Режим: {current_mode}", (25, 260))
-        btn_number_of_players = Button(f"Игроков: {str(current_players)}", (25, 200))
+        #btn_change_mode = Button(f"Режим: {current_mode}", (25, 260))
+        #btn_number_of_players = Button(f"Игроков: {str(current_players)}", (25, 200))
         for ev in event.get():
             if ev.type == QUIT:
                 os._exit(0)
@@ -39,9 +39,9 @@ def intro_menu():
                 if btn_start_game.check_click(ev.pos):
                     intro = False
                     main_game_loop()
-                if btn_change_mode.check_click(ev.pos): # Change mode to custom or classic
-                    mode_change = {modes["Classic"][0]: modes["Custom"], modes["Custom"][0]: modes["Classic"]} # less then if/else
-                    current_mode, mode_rect_color = mode_change[current_mode] # gives here name of mode and color for btn_change_mode color rect
+                #if btn_change_mode.check_click(ev.pos): # Change mode to custom or classic
+                    #mode_change = {modes["Classic"][0]: modes["Custom"], modes["Custom"][0]: modes["Classic"]} # less then if/else
+                    #current_mode, mode_rect_color = mode_change[current_mode] # gives here name of mode and color for btn_change_mode color rect
                 #Add\substract players
                 if btn_add_player.check_click(ev.pos) and current_players < 4:
                     current_players += 1
@@ -135,7 +135,7 @@ def shop():
 
 def main_game_loop():
     game = True
-    btn_back_to_menu = Button("Меню", (670, 450), size=35)
+    #btn_back_to_menu = Button("Menu", (670, 450), size=35)
     pic_deal, pic_double, pic_down_bet, pic_hit, pic_stand, pic_up_bet = main_game_pic_init() # Main pictures (for hit, stand, etc)
     pictures = sprite.Group(pic_deal, pic_double, pic_down_bet, pic_hit, pic_stand, pic_up_bet)
     deck = cards.generate_deck()
@@ -159,9 +159,9 @@ def main_game_loop():
                 os._exit(0)
             
             if ev.type == MOUSEBUTTONDOWN:
-                if btn_back_to_menu.check_click(ev.pos):
-                    game = False
-                    intro_menu()
+               # if btn_back_to_menu.check_click(ev.pos):
+               #     game = False
+               #     intro_menu()
                 if not start_round and not game_over and pic_deal.check_click(ev.pos):
                     chips -= bet
                     msg_to_player = "" # We shouldn't say something
@@ -231,8 +231,8 @@ def main_game_loop():
             pic_stand.change_pic(images.standg_path)
 
         main_window.blit(game_background, (0, 0))
-        btn_back_to_menu.draw_rect(main_window)
-        btn_back_to_menu.update(main_window)
+       # btn_back_to_menu.draw_rect(main_window)
+       # btn_back_to_menu.update(main_window)
         main_window.blit(chips_font, (665, 150))
         main_window.blit(bet_font, (665, 190))
         pictures.draw(main_window)
