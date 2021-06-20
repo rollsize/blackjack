@@ -258,4 +258,5 @@ def main_game_loop():
         time.delay(33)
 
 if __name__ == "__main__":
-    intro_menu()
+    #intro_menu()
+    main_game_loop()
